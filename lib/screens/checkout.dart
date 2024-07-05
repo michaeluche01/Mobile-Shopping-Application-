@@ -6,8 +6,17 @@ class Checkout extends StatelessWidget {
   final List<Product> checkoutItems;
   final Function(Product) removeProduct;
 
-  const Checkout(
-      {super.key, required this.checkoutItems, required this.removeProduct});
+  Checkout({
+    super.key,
+    required this.checkoutItems,
+    required this.removeProduct,
+  });
+
+  final List<Color> tileColors = [
+    Colors.amber[50]!,
+    Colors.red[100]!,
+    Colors.blue[100]!
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +26,17 @@ class Checkout extends StatelessWidget {
           child: ListView.builder(
             itemCount: checkoutItems.length,
             itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(checkoutItems[index].name),
-                subtitle: Text('₦${checkoutItems[index].price}'),
-                trailing: IconButton(
-                  icon: const Icon(Icons.remove),
-                  onPressed: () {
-                    removeProduct(checkoutItems[index]);
-                  },
+              return Container(
+                color: tileColors[index % tileColors.length],
+                child: ListTile(
+                  title: Text(checkoutItems[index].name),
+                  subtitle: Text('₦${checkoutItems[index].price}'),
+                  trailing: IconButton(
+                    icon: const Icon(Icons.remove),
+                    onPressed: () {
+                      removeProduct(checkoutItems[index]);
+                    },
+                  ),
                 ),
               );
             },
@@ -45,6 +57,7 @@ class Checkout extends StatelessWidget {
             ),
           ),
         ),
+        const SizedBox(height: 60),
       ],
     );
   }

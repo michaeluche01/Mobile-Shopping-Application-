@@ -7,12 +7,19 @@ class OrderSuccessful extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Order Successful'),
+        title: const Text('Order Confirmation'),
+        centerTitle: true,
       ),
       body: const Center(
-        child: Text(
-          'Your order has been placed successfully!',
-          style: TextStyle(fontSize: 24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              ' 🥳 Your order has been placed Successfully!',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
       ),
     );

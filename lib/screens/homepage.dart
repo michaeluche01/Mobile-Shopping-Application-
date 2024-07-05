@@ -38,10 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Gadgets Store',
           style: TextStyle(
+            fontFamily: 'Montserrat',
             fontWeight: FontWeight.bold,
+            color: Colors.amber[800],
           ),
         ),
         centerTitle: true,
@@ -53,17 +55,45 @@ class _HomeScreenState extends State<HomeScreen> {
               removeProduct: removeProduct,
             ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+        items: <BottomNavigationBarItem>[
+          const BottomNavigationBarItem(
             icon: Icon(Icons.shopping_bag),
             label: 'Products',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
+            icon: Stack(
+              children: <Widget>[
+                const Icon(Icons.shopping_cart),
+                if (_checkoutItems.isNotEmpty)
+                  Positioned(
+                    right: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(1),
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      constraints: const BoxConstraints(
+                        minWidth: 13,
+                        minHeight: 13,
+                      ),
+                      child: Text(
+                        '${_checkoutItems.length}',
+                        style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 8,
+                            fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
             label: 'Checkout',
           ),
         ],
         currentIndex: _selectedIndex,
+        selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
     );
